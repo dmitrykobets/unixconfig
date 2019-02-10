@@ -1,5 +1,5 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+  silent !curl -fLo/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -21,10 +21,35 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'mhinz/vim-signify'
 Plug 'aserebryakov/vim-todo-lists'
+Plug 'lervag/vimtex'
+Plug 'brennier/quicktex'
+Plug 'Valloric/YouCompleteMe'
+Plug 'artur-shaik/vim-javacomplete2'
+" Plug 'typeintandem/vim'
+" Plug 'w0rp/ale'
+Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
 call plug#end()
 
 syntax on
+filetype off
 filetype plugin indent on
+
+augroup vimtex_config
+    autocmd User VimtexEventInitPost VimtexCompile
+augroup END
+
+set conceallevel=2
+let g:tex_conceal="abdgm"
+
+source ~/.vim/plugged/quicktex/ftplugin/tex.vim
+
+if !exists('g:ycm_semantic_triggers')
+let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+
+" autocmd FileType java setlocal omnifunc=javacomplete#Complete
+nmap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused) <Plug>(JavaComplete-Imports-AddMissing)
 
 inoremap jj <Esc>
 nnoremap ; :
@@ -48,7 +73,6 @@ set mouse=n
 set ignorecase
 set smartcase
 
-" noremap <c-p> :FZF ~/sync/VoiceServices/VoiceServices<CR>
 noremap <c-p> :FZF<CR>
 
 " smooth scroll
@@ -102,3 +126,33 @@ let g:tagbar_width=winwidth(0)/2
 set cursorline
 
 set incsearch
+
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\" zz" | endif
+endif
+
+
+
+" Auto pastemode
+" Pressing ctrl-shift-v will automagically enter pastemode, paste the text,
+" and exit paste mode
+" Obtained from: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
+" Apparently special consideration has to be taken if using tmux
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+function! Format()
+    normal gg=G ''
+endfunction
+
+nnoremap <s-F> :call Format()<CR>
