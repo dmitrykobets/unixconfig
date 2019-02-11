@@ -8,7 +8,6 @@ call plug#begin()
 Plug 'junegunn/vim-easy-align'
 Plug 'tomtom/tcomment_vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'}
-Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/Tabmerge'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-surround'
