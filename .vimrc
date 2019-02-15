@@ -50,7 +50,7 @@ let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 " autocmd FileType java setlocal omnifunc=javacomplete#Complete
 nmap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused) <Plug>(JavaComplete-Imports-AddMissing)
 
-inoremap jj <Esc>
+inoremap jj <Esc>l
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
@@ -58,19 +58,19 @@ set tabstop=4
 set number
 set relativenumber
 
-noremap <silent><c-s> :update<CR>
-vnoremap <silent><c-s> <c-c>:update<CR>
-inoremap <silent><c-s> <c-o>:update<CR><Esc>
+noremap <silent><c-s> :update<CR>l
+inoremap <silent><c-s> <c-o>:update<CR><Esc>l
 
 set laststatus=2
 set statusline+=%F
 
 set splitright
 
-set mouse=n
+set mouse=a
 
 set ignorecase
 set smartcase
+set smartindent
 
 noremap <c-p> :FZF<CR>
 
@@ -95,6 +95,7 @@ set hlsearch
 
 let g:ConqueTerm_ToggleKey='<F9>'
 
+noremap <Esc> <Esc>l
 noremap <F7> :ConqueTermTab bash<CR>
 noremap <F6> :UndotreeToggle<CR>
 noremap <F8> :BTags<CR>
@@ -150,8 +151,13 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
+" Auto
+
+" Format code
+
 function! Format()
     normal gg=G ''
 endfunction
 
-nnoremap <s-F> :call Format()<CR>
+nnoremap <s-H> :call Format()<CR>
+
