@@ -95,7 +95,6 @@ set hlsearch
 
 let g:ConqueTerm_ToggleKey='<F9>'
 
-noremap <Esc> <Esc>l
 noremap <F7> :ConqueTermTab bash<CR>
 noremap <F6> :UndotreeToggle<CR>
 noremap <F8> :BTags<CR>
