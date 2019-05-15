@@ -21,7 +21,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'mhinz/vim-signify'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'lervag/vimtex'
-Plug 'brennier/quicktex'
+" Plug 'brennier/quicktex'
 Plug 'Valloric/YouCompleteMe'
 Plug 'artur-shaik/vim-javacomplete2'
 " Plug 'typeintandem/vim'
@@ -40,7 +40,7 @@ augroup END
 set conceallevel=2
 let g:tex_conceal="abdgm"
 
-source ~/.vim/plugged/quicktex/ftplugin/tex.vim
+" source ~/.vim/plugged/quicktex/ftplugin/tex.vim
 
 if !exists('g:ycm_semantic_triggers')
 let g:ycm_semantic_triggers = {}
@@ -58,7 +58,7 @@ set tabstop=4
 set number
 set relativenumber
 
-noremap <silent><c-s> :update<CR>l
+noremap <silent><c-s> :update<CR>
 inoremap <silent><c-s> <c-o>:update<CR><Esc>l
 
 set laststatus=2
@@ -101,8 +101,6 @@ noremap <F8> :BTags<CR>
 noremap <s-F8> :Tagbar<CR>
 
 let g:undotree_HighlightChangedText=1
-
-inoremap <Esc> <Esc>l
 
 set colorcolumn=120
 
@@ -158,5 +156,5 @@ function! Format()
     normal gg=G ''
 endfunction
 
-nnoremap <s-H> :call Format()<CR>
-
+set virtualedit=onemore
+inoremap <Esc> <Esc>l
